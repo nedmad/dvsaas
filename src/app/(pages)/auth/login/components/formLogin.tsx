@@ -11,8 +11,6 @@ import style from "./form.module.css"
 import { FiLoader } from "react-icons/fi";
 import { FirebaseError } from "firebase/app";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const schema = z.object({
     email: z.string().email("Insira um email válido"),
