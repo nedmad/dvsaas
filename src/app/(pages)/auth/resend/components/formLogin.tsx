@@ -1,9 +1,9 @@
 "use client"
 import Input from "@/components/input/input";
-import { email, z } from "zod"
+import {  z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/services/services.firebase";
 import toast from "react-hot-toast";
 import { useTransition } from "react";
@@ -50,7 +50,7 @@ export default function FormLogin() {
 
 
 
-    return (<>
+    return (<section>
         <form onSubmit={handleSubmit(handleForm)} className="flex gap-3 flex-col w-full max-w-md">
             <h1 className="text-center font-bold text-xl mb-5">Digite seu E-mail para recuperação de senha</h1>
 
@@ -67,5 +67,5 @@ export default function FormLogin() {
             </button>
 
 
-        </form></>)
+        </form></section>)
 }
