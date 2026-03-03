@@ -3,18 +3,32 @@ import { AuthContext } from "@/context/authUser/authContext";
 import { auth } from "@/services/services.firebase";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useContext, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState, useTransition } from "react";
 import { FiBox, FiLogOut, FiUser } from "react-icons/fi";
 
 export default function Header() {
   const { authUser } = useContext(AuthContext);
-  const [loading, setLoading] = useTransition();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!authUser) {
+      router.replace("/auth/login");
+    }
+  }, [authUser])
+  if (!authUser) return null;
+
   async function handleLogout() {
-    setLoading(async () => {
+    try {
+      setLoading(true);
       await signOut(auth);
-    });
-    window.location.reload();
+      router.refresh();
+    } finally {
+      setLoading(false);
+    }
+
+
   }
   return (
     <>

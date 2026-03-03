@@ -9,9 +9,18 @@ import { utilRegister } from "@/utils/auth/register/register";
 import { schemaRegister } from "@/utils/auth/register/schemaZodRegister";
 import { FormDataRegister } from "@/utils/auth/register/typeFormZodRegister";
 import ButtonGoogle from "@/components/auth/buttonLoginGoogle/buttongoogle";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/authUser/authContext";
+import { useContext } from "react";
 
 export default function FormRegister() {
   const { loading, handleForm } = utilRegister();
+  const { authUser } = useContext(AuthContext);
+
+  const router = useRouter()
+  if (authUser) {
+    router.push("/")
+  }
 
   const {
     register,

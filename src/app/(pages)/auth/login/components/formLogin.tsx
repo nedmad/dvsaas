@@ -11,10 +11,15 @@ import { FormDataLogin } from "@/utils/auth/login/typeFormZodLogin";
 import { schemaLogin } from "@/utils/auth/login/schemaRegraZodLogin";
 import { useContext } from "react";
 import { AuthContext } from "@/context/authUser/authContext";
+import { useRouter } from "next/navigation";
 
 export default function FormLogin() {
   const { handleFormLogin, loading } = utilLogin();
   const { authUser } = useContext(AuthContext);
+  const router = useRouter()
+  if(authUser){
+    router.push("/")
+  }
 
   const {
     register,
