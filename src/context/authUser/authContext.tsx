@@ -1,19 +1,28 @@
-"use client"
+"use client";
 import { auth } from "@/services/services.firebase";
-import { User } from "firebase/auth";
-import { createContext } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { createContext, useState } from "react";
 
-interface AuthContextType{
-    authUser: User | null
+interface AuthContextType {
+  authUser: string | null;
 }
 
-export const AuthContext = createContext({} as AuthContextType)
+export const AuthContext = createContext({} as AuthContextType);
 
-export default function AuthProvider({children}:{children: React.ReactNode}){
-    const data = auth
-    const authUser = data.currentUser
-    
- 
+export default function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [authUser, setAuthUser] = useState<string | null>("");
 
-    return <AuthContext.Provider value={{authUser}}>{children}</AuthContext.Provider>
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setAuthUser(user?.email);
+    }
+  });
+
+  return (
+    <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>
+  );
 }

@@ -9,9 +9,12 @@ import ButtonGoogle from "@/components/auth/buttonLoginGoogle/buttongoogle";
 import { utilLogin } from "@/utils/auth/login/login";
 import { FormDataLogin } from "@/utils/auth/login/typeFormZodLogin";
 import { schemaLogin } from "@/utils/auth/login/schemaRegraZodLogin";
+import { useContext } from "react";
+import { AuthContext } from "@/context/authUser/authContext";
 
 export default function FormLogin() {
   const { handleFormLogin, loading } = utilLogin();
+  const { authUser } = useContext(AuthContext);
 
   const {
     register,
