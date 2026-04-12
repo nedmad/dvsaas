@@ -17,9 +17,7 @@ export default function AuthProvider({
   const [authUser, setAuthUser] = useState<string | null>("");
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setAuthUser(user?.email);
-    }
+    setAuthUser(user ? user.email : null);
   });
 
   return (

@@ -10,25 +10,22 @@ import { FiBox, FiLogOut, FiUser } from "react-icons/fi";
 export default function Header() {
   const { authUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (!authUser) {
       router.replace("/auth/login");
     }
-  }, [authUser])
+  }, [authUser]);
   if (!authUser) return null;
 
   async function handleLogout() {
     try {
       setLoading(true);
       await signOut(auth);
-      router.refresh();
     } finally {
       setLoading(false);
     }
-
-
   }
   return (
     <>
